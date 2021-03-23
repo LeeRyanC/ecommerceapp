@@ -14,6 +14,6 @@ export default makeStyles(() => ({
     },
     cardContent: {
         display: 'flex',
-        justifyContent: 'spac-between',
+        justifyContent: 'space-between',
     },
 }))
