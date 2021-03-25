@@ -1,15 +1,18 @@
 import React from 'react'
 import { Container, Typography, Button, Grid } from '@material-ui/core'
 import Cartitem from './Cartitem/Cartitem'
+import { Link } from 'react-router-dom'
 
 import useStyles from './styles'
 
 
-const Cart = ({cart}) => {
+const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}) => {
     const classes = useStyles();
 
     const EmptyCart = () =>{
-        <Typography variant="subtitle1">You have no items in your cart, start adding some!</Typography>
+        <Typography variant="subtitle1">You have no items in your cart, start adding some!
+            <Link to="/" className={classes.link}>Start adding some items!</Link>
+        </Typography>
     }
 
     const FilledCart = () =>{
@@ -17,7 +20,7 @@ const Cart = ({cart}) => {
             <Grid container spacing={3}>
                 {cart.line_items.map((item) => (
                     <Grid item xs={12} sm={4} key={item.id}>
-                        <Cartitem item={item} />
+                        <Cartitem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart}/>
                     </Grid>
                 ))}
             </Grid>
@@ -26,10 +29,10 @@ const Cart = ({cart}) => {
                         Subtotal: {cart.subtotal.formatted_with_symbol}
                     </Typography>
                     <div>
-                        <Button className={classes.emptyButton} size='large' type='button' variant='contained' color='secondary'>
+                        <Button className={classes.emptyButton} size='large' type='button' variant='contained' color='secondary' onClick={handleEmptyCart}>
                             Empty Cart
                         </Button>
-                        <Button className={classes.checkout} size='large' type='button' variant='contained' color='primary'>
+                        <Button component={Link} to="/checkout" className={classes.checkout} size='large' type='button' variant='contained' color='primary'>
                             Checkout
                         </Button>
                     </div>
