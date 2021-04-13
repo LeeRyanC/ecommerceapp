@@ -9,13 +9,13 @@ import useStyles from './styles'
 const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}) => {
     const classes = useStyles();
 
-    const EmptyCart = () =>{
+    const EmptyCart = () => (
         <Typography variant="subtitle1">You have no items in your cart, start adding some!
-            <Link to="/" className={classes.link}>Start adding some items!</Link>
+            <Link to="/" className={classes.link}> Start adding some items!</Link>
         </Typography>
-    }
+    );
 
-    const FilledCart = () =>{
+    const FilledCart = () => (
         <>
             <Grid container spacing={3}>
                 {cart.line_items.map((item) => (
@@ -38,7 +38,7 @@ const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}
                     </div>
             </div>
         </>
-    };
+    );
 
     if(!cart.line_items) return "Loading...";
 
